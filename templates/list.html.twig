@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 style="text-align: center">Employees matching list</h1>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Matching</th>
+        </tr>
+    {% for match in matching %}
+        <tr>
+            <td>{{ match.Name }}</td>
+            <td>{{ match.Email }}</td>
+            <td>{{ match.Matching }}%</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
