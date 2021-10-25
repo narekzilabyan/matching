@@ -54,7 +54,7 @@ class MatchingService
 
         //Loop on all employees list
         for ($i = 0; $i < $countParsedData; $i++) {
-            $result[$i]['MatchingController'] = 0;
+            $result[$i]['Matching'] = 0;
 
             //Loop on one employee characteristics for matching percents calculation
             foreach ($parsedData[$i] as $key => $value) {
@@ -65,20 +65,20 @@ class MatchingService
                         if (isset($dataForCheckMatches[$key][$j])){
                             //Check in order not to protect the employee's own age
                             if ($j == $value) {
-                                $result[$i]['MatchingController'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$j] - 1);
+                                $result[$i]['Matching'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$j] - 1);
                                 continue;
                             }
 
-                            $result[$i]['MatchingController'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$j]);
+                            $result[$i]['Matching'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$j]);
                         }
                     }
                 } else {
-                    $result[$i]['MatchingController'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$value]);
+                    $result[$i]['Matching'] += $this->getPercentByCharacteristic($key, $dataForCheckMatches[$key][$value]);
                 }
             }
             //calculate average for employee
-            $result[$i]['MatchingController'] = ceil($result[$i]['MatchingController']/($countParsedData-1));
-            $matchingArray[] = $result[$i]['MatchingController'];
+            $result[$i]['Matching'] = ceil($result[$i]['Matching']/($countParsedData-1));
+            $matchingArray[] = $result[$i]['Matching'];
         }
 
         array_multisort($matchingArray, SORT_DESC, $result);
